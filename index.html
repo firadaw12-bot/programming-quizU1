@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7e57c2">
+  <meta name="description" content="ระบบแบบทดสอบออนไลน์ บทเรียนที่ 1 ความรู้พื้นฐานในการเขียนโปรแกรม">
+  <title>ระบบสอบออนไลน์ | ความรู้พื้นฐานในการเขียนโปรแกรม</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="config.js"></script>
+  <script defer src="questions.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <header class="topbar">
+    <div class="brandmark" aria-hidden="true">✦</div>
+    <div class="brandtext">
+      <div id="schoolName" class="school-name">วิทยาลัยเทคนิคประจวบคีรีขันธ์</div>
+      <div id="departmentName" class="department-name">แผนกวิชาเทคโนโลยีธุรกิจดิจิทัล</div>
+    </div>
+    <span class="top-label">ONLINE EXAM</span>
+  </header>
+  <main class="shell">
+    <section id="introScreen" class="intro-wrap" aria-labelledby="heroTitle">
+      <div class="intro-copy">
+        <span class="eyebrow"><span class="eyebrow-dot"></span> แบบทดสอบประจำบทเรียน</span>
+        <h1 id="heroTitle">ทดสอบความรู้พื้นฐาน<br><span>ในการเขียนโปรแกรม</span></h1>
+        <p class="intro-lead">เตรียมพร้อมสำหรับการเรียนรู้โลกของการเขียนโปรแกรม ด้วยแบบทดสอบที่ช่วยวัดความเข้าใจของคุณ</p>
+        <div class="stats-row">
+          <div class="mini-stat"><span class="mini-icon">☰</span><div><strong id="introCount">25 ข้อ</strong><small>ปรนัย 4 ตัวเลือก</small></div></div>
+          <div class="mini-stat"><span class="mini-icon">◷</span><div><strong id="introDuration">30 นาที</strong><small>จำกัดเวลา</small></div></div>
+          <div class="mini-stat"><span class="mini-icon">☆</span><div><strong id="introPass">60%</strong><small>เกณฑ์ผ่าน</small></div></div>
+        </div>
+        <div class="topics">
+          <p class="topic-label">เนื้อหาที่ครอบคลุม</p>
+          <div class="chips"><span>ภาษาคอมพิวเตอร์</span><span>ขั้นตอนการพัฒนาโปรแกรม</span><span>Pseudo Code</span><span>Flowchart</span></div>
+        </div>
+      </div>
+      <div class="form-card">
+        <div class="form-heading"><span class="form-orb" aria-hidden="true">✏</span><div><h2>ลงทะเบียนเข้าสอบ</h2><p>กรอกข้อมูลให้ครบก่อนเริ่มทำข้อสอบ</p></div></div>
+        <form id="startForm" autocomplete="on">
+          <label for="studentName">ชื่อ–นามสกุล <span class="required">*</span></label>
+          <input id="studentName" name="studentName" type="text" required maxlength="100" autocomplete="name" placeholder="เช่น นางสาวตัวอย่าง เรียนดี">
+          <label for="studentId">รหัสนักเรียน / นักศึกษา <span class="required">*</span></label>
+          <input id="studentId" name="studentId" type="text" required maxlength="30" inputmode="text" placeholder="กรอกรหัสประจำตัว">
+          <div class="form-row">
+            <div><label for="studentClass">ระดับชั้น / กลุ่ม <span class="required">*</span></label><input id="studentClass" name="studentClass" type="text" required maxlength="60" placeholder="เช่น ปวช.1/1"></div>
+            <div><label for="studentNumber">เลขที่</label><input id="studentNumber" name="studentNumber" type="text" maxlength="10" inputmode="numeric" placeholder="เช่น 12"></div>
+          </div>
+          <div class="instruction"><span aria-hidden="true">ⓘ</span><p>เมื่อกดเริ่มสอบ ระบบจะเริ่มนับเวลาทันที สามารถย้อนกลับและเปลี่ยนคำตอบได้ก่อนส่งข้อสอบ</p></div>
+          <button type="submit" class="btn btn-primary btn-wide">เริ่มทำข้อสอบ <span aria-hidden="true">→</span></button>
+        </form>
+        <div id="resumeBar" class="resume-bar hidden" role="status">
+          <p>พบข้อสอบที่ยังทำไม่เสร็จบนอุปกรณ์นี้</p>
+          <div class="resume-actions"><button id="resumeBtn" type="button" class="btn btn-secondary">ทำต่อ</button><button id="restartBtn" type="button" class="text-button">เริ่มใหม่</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="examScreen" class="exam-layout hidden" aria-labelledby="examHeading">
+      <aside class="exam-aside" aria-label="สถานะการทำข้อสอบ">
+        <div class="aside-brand"><span class="aside-badge">บทเรียนที่ 01</span><h2 id="examHeading">ความรู้พื้นฐาน<br>ในการเขียนโปรแกรม</h2><div class="aside-person" id="examPerson"></div></div>
+        <div class="clock-card"><div class="clock-heading"><span>เวลาคงเหลือ</span><span aria-hidden="true">◷</span></div><div id="timerText" class="clock-value" aria-live="off">30:00</div><div class="clock-track"><div id="clockFill" class="clock-fill"></div></div></div>
+        <div class="aside-progress"><div class="progress-top"><strong>ความคืบหน้า</strong><span id="progressCount">0 / 25 ข้อ</span></div><div class="progress-track"><div id="progressFill" class="progress-fill"></div></div></div>
+        <p class="navigator-title">เลือกข้อสอบ</p>
+        <nav id="questionNav" class="question-nav" aria-label="ข้ามไปยังข้อสอบที่ต้องการ"></nav>
+        <div class="legend"><span><i class="legend-answered"></i>ตอบแล้ว</span><span><i class="legend-current"></i>ข้อปัจจุบัน</span><span><i class="legend-empty"></i>ยังไม่ตอบ</span></div>
+        <button id="asideSubmit" type="button" class="btn btn-primary btn-wide aside-submit">ส่งคำตอบทั้งหมด</button>
+      </aside>
+      <div class="question-area">
+        <div class="question-topline"><div><span class="section-kicker">แบบทดสอบออนไลน์</span><div class="question-counter" id="questionCounter">ข้อที่ 1 จาก 25</div></div><span class="point-pill">1 คะแนน / ข้อ</span></div>
+        <div class="question-card"><span id="topicBadge" class="topic-badge">ความรู้พื้นฐาน</span><h2 id="questionText" class="question-text">...</h2><div id="answersList" class="answers" role="radiogroup" aria-label="เลือกคำตอบเพียงหนึ่งข้อ"></div><p class="single-hint">เลือกคำตอบที่ถูกต้องที่สุดเพียง 1 ตัวเลือก</p></div>
+        <div class="question-actions"><button type="button" id="prevBtn" class="btn btn-secondary">← ข้อก่อนหน้า</button><button type="button" id="nextBtn" class="btn btn-primary">ข้อถัดไป →</button></div>
+        <p class="autosave">✓ บันทึกคำตอบในอุปกรณ์นี้โดยอัตโนมัติ</p>
+      </div>
+    </section>
+
+    <section id="resultScreen" class="result-wrap hidden" aria-labelledby="resultHeading">
+      <div class="result-card">
+        <div class="result-top"><span class="eyebrow">ส่งข้อสอบเรียบร้อย</span><h1 id="resultHeading">สรุปผลการทำแบบทดสอบ</h1><p id="resultIdentity"></p></div>
+        <div class="result-main"><div id="scoreRing" class="score-ring"><div class="score-inner"><strong id="scoreValue">0<span>/25</span></strong><small>คะแนนที่ได้</small></div></div><div class="result-summary"><span id="passBadge" class="pass-badge">ผลการสอบ</span><h2 id="scorePercent">0%</h2><p id="resultDescription"></p><div class="result-info"><div>ตอบถูก <strong id="correctNum">0 ข้อ</strong></div><div>ตอบผิด/ไม่ตอบ <strong id="wrongNum">0 ข้อ</strong></div><div>เวลาที่ใช้ <strong id="usedTime">0 นาที</strong></div></div></div></div>
+        <div id="sheetStatus" class="sheet-status" role="status" aria-live="polite"></div>
+        <div id="reviewBox" class="review-box hidden"></div>
+        <div class="result-actions"><button id="printBtn" class="btn btn-primary">พิมพ์ / บันทึกเป็น PDF</button><button id="downloadBtn" class="btn btn-secondary">ดาวน์โหลดสลิปผลสอบ (.csv)</button><button id="retrySendBtn" class="btn btn-secondary hidden">ส่งคะแนนอีกครั้ง</button><button id="retakeBtn" class="text-button">กลับหน้าหลัก</button></div>
+      </div>
+    </section>
+  </main>
+  <footer class="page-footer"><span>Digital Learning & Assessment · <span id="footerCourse">21910-1003</span></span><span>ออกแบบเพื่อการวัดผลระหว่างเรียน</span></footer>
+
+  <dialog id="confirmDialog" class="confirm-dialog" aria-labelledby="confirmTitle"><h2 id="confirmTitle">ยืนยันการส่งข้อสอบ</h2><p id="confirmText"></p><div class="modal-actions"><button id="cancelSubmit" type="button" class="btn btn-secondary">กลับไปตรวจคำตอบ</button><button id="confirmSubmit" type="button" class="btn btn-primary">ยืนยันส่งข้อสอบ</button></div></dialog>
+  <noscript><div class="noscript">กรุณาเปิดใช้งาน JavaScript เพื่อทำแบบทดสอบออนไลน์นี้</div></noscript>
+</body>
+</html>
